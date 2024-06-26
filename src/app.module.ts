@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AddressEntity } from './address/entities/address.entity';
 import { AuthenticateModule } from './authenticate/authenticate.module';
 import { CartModule } from './cart/cart.module';
 import { CartEntity } from './cart/entities/cart.entity';
@@ -18,7 +19,13 @@ import { UserManagement } from './user_management/user_management.module';
       username: 'postgres',
       password: 'mari0001',
       database: 'postgres',
-      entities: [OrderEntity, UserManageEntity, CartEntity, DepartmenttEntity],
+      entities: [
+        OrderEntity,
+        UserManageEntity,
+        AddressEntity,
+        CartEntity,
+        DepartmenttEntity,
+      ],
       synchronize: true,
     }),
     UserManagement,

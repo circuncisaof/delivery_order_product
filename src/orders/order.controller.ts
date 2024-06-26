@@ -21,8 +21,8 @@ export class OrderController {
   constructor(private readonly order_serv: OrderService) {}
 
   @Post()
-  async create_order(@Body() data: OrderDto) {
-    return this.order_serv.create_order(data);
+  async create_order(@Param('id') id: string, @Body() data: OrderDto) {
+    return this.order_serv.create_order(id, data);
   }
 
   @Get()

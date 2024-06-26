@@ -18,7 +18,7 @@ export class OrderService {
     @InjectRepository(OrderEntity)
     private order_repo: Repository<OrderEntity>,
   ) {}
-  async create_order(data: OrderDto) {
+  async create_order(id: string, data: OrderDto) {
     data.order_number = await this.order_number();
     const new_data = await this.order_repo.create(data);
     return this.order_repo.save(new_data);

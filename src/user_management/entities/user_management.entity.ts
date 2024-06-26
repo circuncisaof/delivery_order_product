@@ -1,9 +1,22 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AddressEntity } from 'src/address/entities/address.entity';
+import { OrderEntity } from 'src/orders/entities/order.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'user_management' })
 export class UserManageEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column({ name: 'id_address', nullable: false })
+  id_address: string;
 
   @Column({ nullable: false, length: 200 })
   name: string;
@@ -28,8 +41,14 @@ export class UserManageEntity {
 
   @Column({ nullable: false, unique: true })
   cell_phone: string;
-  @Column({ nullable: false, name: 'address' })
-  address: string;
+
   @Column({ nullable: false })
   password: string;
+
+  @OneToOne(() => AddressEntity, (address: AddressEntity) => address.user)
+  @JoinColumn({ name: 'id_address', referencedColumnName: 'id' })
+  address?: AddressEntity;
+
+  @OneToMany(() => OrderEntity, (order) => order.users)
+  order?: OrderEntity;
 }
