@@ -30,7 +30,6 @@ export class OrderService {
 
   async orders_deliveries() {
     return this.order_repo.find({
-      where: { delivery_date: },
       order: { createdAt: 'ASC' },
     });
   }
